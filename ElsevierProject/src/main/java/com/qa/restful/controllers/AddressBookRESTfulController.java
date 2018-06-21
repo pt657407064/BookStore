@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.models.Address;
@@ -20,8 +24,10 @@ public class AddressBookRESTfulController {
 	@Autowired
 	private AddressService addressService;
 	
-	@RequestMapping("/changeAddress")
-	public Map<String, Address> updateAddress(@ModelAttribute("logged_in_customer") Customer loggedInCustomer, @ModelAttribute("Address") Address address){
+	@RequestMapping(value="/changeAddress", method=RequestMethod.POST)
+	
+	// Need to use spring security to get current logged in user's information
+	public ResponseEntity<Map<String, Address>> updateAddress(@ModelAttribute("logged_in_customer") Customer loggedInCustomer, @RequestBody Address address){
 		
 		Map<String, Address> addresses = new HashMap<String, Address>();
 		
@@ -73,7 +79,7 @@ public class AddressBookRESTfulController {
 			addresses.put("billing_address", savedAddress);
 			
 		}
-		return addresses;
+		return new ResponseEntity<>(addresses,HttpStatus.OK);
 	}
 	
 	
