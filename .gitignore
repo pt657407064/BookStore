@@ -1,2 +1,2 @@
-.gitignore
-bookstoreclient/node_modules
+ElsevierProject/pom.xml
+ElsevierProject/src/main/resources/application.properties
