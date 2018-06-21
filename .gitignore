@@ -1,2 +1,3 @@
 ElsevierProject/pom.xml
 ElsevierProject/src/main/resources/application.properties
+target/
